@@ -1,5 +1,6 @@
 package com.project.service.impl;
 
+import com.project.dto.CreateVaccineDTO;
 import com.project.dto.VaccineDTO;
 import com.project.entity.Vaccine;
 import com.project.repository.VaccineRepository;
@@ -63,8 +64,14 @@ public class VaccineServiceImpl implements VaccineService {
     }
 
     @Override
-    public void createVaccine(String nameVaccine, double dosageVaccine, String licenseCode, String maintenance, String origin, String expired, String age, int quantity, int vaccineTypeId, int vaccineDuration, int vaccineTimes) {
-        vaccineRepository.createVaccine(nameVaccine, dosageVaccine, licenseCode, maintenance, origin, expired, age, quantity, vaccineTypeId, vaccineDuration, vaccineTimes);
+    public void createVaccine(CreateVaccineDTO createVaccineDTO) {
+        vaccineRepository.createVaccine(
+                createVaccineDTO.getNameVaccine(), createVaccineDTO.getDosage(),
+                createVaccineDTO.getLicenseCode(), createVaccineDTO.getMaintenance(),
+                createVaccineDTO.getOrigin(), createVaccineDTO.getExpired(),
+                createVaccineDTO.getAge(), createVaccineDTO.getQuantity(),
+                Integer.parseInt(createVaccineDTO.getTypeVaccine()), createVaccineDTO.getDuration(),
+                createVaccineDTO.getTimes(), createVaccineDTO.getImgVaccine());
     }
 
     @Override

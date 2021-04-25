@@ -67,10 +67,11 @@ public interface VaccineRepository extends JpaRepository<Vaccine, Integer> {
     @Modifying
     @Query(value = "insert into vaccine(vaccine.name, vaccine.dosage, vaccine.license_code , vaccine.maintenance, " +
             "vaccine.origin, vaccine.expired, vaccine.age, vaccine.quantity, vaccine.vaccine_type_id,vaccine.duration, " +
-            "vaccine.times, vaccine.delete_flag)\n" +
-            "value(?1, ?2, ?3, ?4, ?5,?6, ?7, ?8, ?9,?10,?11,0);", nativeQuery = true)
-    void createVaccine(String nameVaccine, double dosageVaccine, String licenseCode, String maintenance, String origin,
-                       String expired, String age, int quantity, int vaccineTypeId, int vaccineDuration, int vaccineTimes);
+            "vaccine.times, vaccine.delete_flag, vaccine.image)\n" +
+            "value(?1, ?2, ?3, ?4, ?5,?6, ?7, ?8, ?9,?10,?11,0,?12);", nativeQuery = true)
+    void createVaccine(String nameVaccine, double dosageVaccine, String licenseCode, String maintenance,
+                       String origin, String expired, String age, long quantity, int vaccineTypeId,
+                       int vaccineDuration, int vaccineTimes, String imgVaccine);
 
     @Query(value = "select * from vaccine where vaccine.name = ?1", nativeQuery = true)
     Vaccine searchName(String name);

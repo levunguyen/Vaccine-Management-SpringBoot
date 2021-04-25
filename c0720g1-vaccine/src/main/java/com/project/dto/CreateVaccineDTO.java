@@ -1,6 +1,7 @@
 package com.project.dto;
 
 public class CreateVaccineDTO {
+    private String imgVaccine;
     private String nameVaccine;
     private String typeVaccine;
     private String dayReceive;
@@ -19,6 +20,13 @@ public class CreateVaccineDTO {
     public CreateVaccineDTO() {
     }
 
+    public String getImgVaccine() {
+        return imgVaccine;
+    }
+
+    public void setImgVaccine(String imgVaccine) {
+        this.imgVaccine = imgVaccine;
+    }
 
     public int getDuration() {
         return duration;

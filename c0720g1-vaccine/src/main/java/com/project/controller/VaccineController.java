@@ -80,26 +80,27 @@ public class VaccineController {
     @PostMapping("/vaccine-create")
     public ResponseEntity<Void> createVaccine(@RequestBody CreateVaccineDTO createVaccineDTO) {
 
+        // Check provider
         Provider provider = providerService.searchNameProvider(createVaccineDTO.getProvider());
 
         if (provider == null) {
             providerService.createProvider(createVaccineDTO.getProvider());
             provider = providerService.searchNameProvider(createVaccineDTO.getProvider());
         }
+        createVaccineDTO.setProvider(provider.getProviderId() + "");
 
+
+        // Check vaccine type
         VaccineType vaccineType = vaccineTypeService.findVaccineType(createVaccineDTO.getTypeVaccine());
 
         if (vaccineType == null) {
             vaccineTypeService.createVaccineType(createVaccineDTO.getTypeVaccine());
             vaccineType = vaccineTypeService.findVaccineType(createVaccineDTO.getTypeVaccine());
         }
+        createVaccineDTO.setTypeVaccine(vaccineType.getVaccineTypeId() + "");
 
-        vaccineService.createVaccine(createVaccineDTO.getNameVaccine(),
-                createVaccineDTO.getDosage(), createVaccineDTO.getLicenseCode(),
-                createVaccineDTO.getMaintenance(), createVaccineDTO.getOrigin(),
-                createVaccineDTO.getExpired(), createVaccineDTO.getAge(),
-                (int) createVaccineDTO.getQuantity(), vaccineType.getVaccineTypeId(),
-                createVaccineDTO.getDuration(), createVaccineDTO.getTimes());
+        // Create vaccine
+        vaccineService.createVaccine(createVaccineDTO);
 
         Vaccine vaccine = vaccineService.searchName(createVaccineDTO.getNameVaccine());
 

@@ -2,6 +2,7 @@ package com.project.service;
 
 import java.util.List;
 
+import com.project.dto.CreateVaccineDTO;
 import com.project.dto.VaccineDTO;
 import com.project.entity.Vaccine;
 import org.springframework.data.domain.Page;
@@ -27,7 +28,7 @@ public interface VaccineService {
 
     List<VaccineDTO> search(String name, String vaccineType, String origin);
 
-    void createVaccine(String nameVaccine, double dosageVaccine, String licenseCode, String maintenance, String origin, String expired, String age, int quantity, int vaccineTypeId, int vaccineDuration, int vaccineTimes);
+    void createVaccine(CreateVaccineDTO createVaccineDTO);
 
     Vaccine searchName(String name);
 
